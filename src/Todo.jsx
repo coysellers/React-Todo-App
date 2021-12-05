@@ -14,27 +14,56 @@ function Task({ task }) {
 
 }
 
+function CreateTask({ addTask }) {
+  const [value, setValue] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!value) return;
+
+    addTask(value);
+    setValue('');
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        value={value}
+        placeholder='Add a new task'
+        onChange={e => setValue(e.target.value)}
+      />
+      <button>Add Task</button>
+    </form>
+  )
+}
+
 function Todo() {
   const [tasks, setTasks] = useState([
     {
-      title: "Grab some Pizza",
+      title: "Completed Example",
       completed: true
     },
     {
-      title: "Do your workout",
-      completed: true
-    },
-    {
-      title: "Hangout with friends",
+      title: "Incompleted Example",
       completed: false
     }
   ]);
 
+  const addTask = title => {
+    const newTasks = [
+      ...tasks,
+      {
+        title,
+        completed: false
+      }
+    ];
+
+    setTasks(newTasks);
+  }
+
   return (
     <div>
-      <div>
-        Todo
-      </div>
       <div>
         {tasks.map((task, index) => (
           <Task
@@ -43,6 +72,10 @@ function Todo() {
             key={index}
           />
         ))}
+      </div>
+
+      <div>
+        <CreateTask addTask={addTask} />
       </div>
     </div>
   )
