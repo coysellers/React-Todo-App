@@ -68,52 +68,43 @@ function Todo() {
   }
 
   return (
-    <div class="min-h-screen bg-gray-50 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12">
-      <img src="/img/beams.jpg" alt="" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none" width="1308" />
-      <div class="absolute inset-0 bg-[url(/img/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      <div class="relative px-6 pt-10 pb-8 bg-white shadow-xl ring-1 ring-gray-900/5 sm:max-w-lg sm:mx-auto sm:rounded-lg sm:px-10">
-        <div class="max-w-md mx-auto">
-          <img src="/img/logo.svg" class="h-6" alt="Tailwind Play" />
-          <div class="divide-y divide-gray-300/50">
-            <div class="py-8 text-base leading-7 space-y-6 text-gray-600">
-              <p>An advanced online playground for Tailwind CSS, including support for things like:</p>
-              <ul class="space-y-4">
-                <li class="flex items-center">
-                  <svg class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="11" />
-                    <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-                  </svg>
-                  <p class="ml-4">
-                    Customizing your
-                    <code class="text-sm font-bold text-gray-900">tailwind.config.js</code> file
-                  </p>
-                </li>
-                <li class="flex items-center">
-                  <svg class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="11" />
-                    <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-                  </svg>
-                  <p class="ml-4">
-                    Extracting classes with
-                    <code class="text-sm font-bold text-gray-900">@apply</code>
-                  </p>
-                </li>
-                <li class="flex items-center">
-                  <svg class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="11" />
-                    <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-                  </svg>
-                  <p class="ml-4">Code completion with instant preview</p>
-                </li>
-              </ul>
-              <p>Perfect for learning how the framework works, prototyping a new idea, or creating a demo to share online.</p>
-            </div>
-            <div class="pt-8 text-base leading-7 font-semibold">
-              <p class="text-gray-900">Want to dig deeper into Tailwind?</p>
-              <p>
-                <a href="https://tailwindcss.com/docs" class="text-sky-500 hover:text-sky-600">Read the docs &rarr;</a>
-              </p>
-            </div>
+    <div class="todo">
+      <img
+        src="https://play.tailwindcss.com/img/beams.jpg"
+        alt=""
+        class="todo-backgroundImage"
+        width="1308"
+      />
+
+      <div class="todo-listPosition">
+        <div class="todo-listContainer">
+          <h1>Todo List</h1>
+          <ul class="todo-list">
+            <li class="todo-listItem">
+              <svg class="todo-listImage" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="11" />
+                <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+              </svg>
+              <p class="todo-listText">Customizing your example file</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="submit">
+          <form class="submit-form">
+            <input
+              class="submit-formInput"
+              type="text"
+              aria-label="Add Items to your list"
+              placeholder="Add Items to your list..." />
+          </form>
+          <div class="submit-buttonContainer">
+            <button class="hover:bg-blue-400 group submit-button">
+              <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
+                <path d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z" />
+              </svg>
+              Add Item
+            </button>
           </div>
         </div>
       </div>
