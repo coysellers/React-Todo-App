@@ -111,7 +111,7 @@ function Todo() {
 
       <div className="todo-listPosition">
         <div className="todo-listContainer">
-          <h1>Todo List</h1>
+          <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
             {tasks.map((task, index) => (
               <Task
