@@ -3,15 +3,17 @@ import React, { useState, useRef, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import './index.css'
 
-function Task({ task, index, removeTask }) {
+function Task({ task, index, completeTask, removeTask }) {
+  const checkMark = task.completed ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" : "";
+
   return (
     <li className="todo-listItem">
-      <svg className="todo-listImage" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="todo-listImage" strokeLinecap="round" strokeLinejoin="round" onClick={() => completeTask(index)}>
         <circle cx="12" cy="12" r="11" />
-        <path d={task.completed ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" : "" } fill="none" />
+        <path d={checkMark} fill="none" />
       </svg>
       <div className="todo-listItemInner">
-        <p className="todo-listText" style={{ textDecoration: task.completed ? "line-through" : "" }}>
+        <p className="todo-listText" style={{ textDecoration: task.completed ? "line-through" : "" }} onClick={() => completeTask(index)}>
           {task.title}
         </p>
         <button className="hover:bg-blue-400 group todo-listItemRemove" onClick={() => removeTask(index)}>
@@ -91,6 +93,13 @@ function Todo() {
     setTasks(newTasks);
   }
 
+  const completeTask = index => {
+    const updatedTasks = [...tasks];
+
+    tasks[index].completed = !tasks[index].completed;
+    setTasks(updatedTasks);
+  }
+
   return (
     <div className="todo">
       <img
@@ -110,6 +119,7 @@ function Todo() {
                 index={index}
                 key={index}
                 removeTask={removeTask}
+                completeTask={completeTask}
               />
             ))}
           </ul>

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 /* Extract utility classes for now... */
-
 .todo {
   @apply min-h-screen bg-gray-50 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12;
 }
@@ -37,7 +36,7 @@
 }
 
 .todo-listText {
-  @apply ml-4;
+  @apply ml-4 cursor-pointer;
 }
 
 .submit {
