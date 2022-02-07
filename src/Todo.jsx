@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import './index.css'
 
@@ -8,14 +8,19 @@ function Task({ task, completeTask, removeTask }) {
 
   return (
     <li className="todo-listItem" key={task.key}>
-      <svg className="todo-listImage" strokeLinecap="round" strokeLinejoin="round" onClick={() => completeTask(task)}>
+      <svg
+        className="todo-listImage"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        onClick={() => completeTask(task)}
+      >
         <circle cx="12" cy="12" r="11" />
         <path d={checkMark} fill="none" />
       </svg>
       <div className="todo-listItemInner">
         <p
-          className="todo-listText"
-          style={{ textDecoration: task.completed ? "line-through" : "" }}
+          className={task.completed ? "todo-listText text-[#d1d5db]" : "todo-listText"}
+          style={{textDecoration: task.completed ? "line-through" : ""}}
           onClick={() => completeTask(task)}
         >
           {task.title}
@@ -69,21 +74,17 @@ function CreateTask({ addTask }) {
 }
 
 function Todo() {
-  const createId = () => uuidv4();
-
   // Add Place holder item
-  const [tasks, setTasks] = useState([
-    {
-      title: "Completed Example",
-      completed: true,
-      key: createId()
-    },
-    {
-      title: "Incompleted Example",
-      completed: false,
-      key: createId()
-    }
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    const data = JSON.parse(savedTasks);
+
+    return savedTasks ? data : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = title => {
     const newTasks = [
@@ -91,7 +92,7 @@ function Todo() {
       {
         title,
         completed: false,
-        key: createId()
+        key: uuidv4()
       }
     ];
 
