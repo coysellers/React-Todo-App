@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 /* Extract utility classes for now... */
-
 .todo {
   @apply min-h-screen bg-gray-50 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12;
 }
 
 .todo-backgroundImage {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none;
+}
+
+.todo-headingPrimary {
+  @apply pb-4 text-2xl font-bold;
 }
 
 .todo-listPosition {
@@ -25,11 +28,11 @@
 }
 
 .todo-listItemInner {
-  @apply flex items-center;
+  @apply flex items-center justify-between basis-full;
 }
 
 .todo-listItemRemove {
-  @apply flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm;
+  @apply flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-2 py-2 shadow-sm;
 }
 
 .todo-listImage {
@@ -37,7 +40,7 @@
 }
 
 .todo-listText {
-  @apply ml-4;
+  @apply ml-4 cursor-pointer;
 }
 
 .submit {

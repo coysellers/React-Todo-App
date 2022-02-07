@@ -1,20 +1,29 @@
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import './index.css'
 
-function Task({ task, index, removeTask }) {
+function Task({ task, completeTask, removeTask }) {
+  const checkMark = task.completed ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" : "";
+
   return (
-    <li className="todo-listItem">
-      <svg className="todo-listImage" strokeLinecap="round" strokeLinejoin="round">
+    <li className="todo-listItem" key={task.key}>
+      <svg className="todo-listImage" strokeLinecap="round" strokeLinejoin="round" onClick={() => completeTask(task)}>
         <circle cx="12" cy="12" r="11" />
-        <path d={task.completed ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" : "" } fill="none" />
+        <path d={checkMark} fill="none" />
       </svg>
       <div className="todo-listItemInner">
-        <p className="todo-listText" style={{ textDecoration: task.completed ? "line-through" : "" }}>
+        <p
+          className="todo-listText"
+          style={{ textDecoration: task.completed ? "line-through" : "" }}
+          onClick={() => completeTask(task)}
+        >
           {task.title}
         </p>
-        <button className="hover:bg-blue-400 group todo-listItemRemove" onClick={() => removeTask(index)}>
+        <button
+          className="hover:bg-blue-400 group todo-listItemRemove"
+          onClick={() => removeTask(task.key)}
+        >
           Remove
         </button>
       </div>
@@ -48,7 +57,6 @@ function CreateTask({ addTask }) {
           onChange={e => setValue(e.target.value)}
         />
 
-        
         <button className="hover:bg-blue-400 group submit-button">
           <svg width="20" height="20" fill="currentColor" className="mr-2" aria-hidden="true">
             <path d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z" />
@@ -61,14 +69,19 @@ function CreateTask({ addTask }) {
 }
 
 function Todo() {
+  const createId = () => uuidv4();
+
+  // Add Place holder item
   const [tasks, setTasks] = useState([
     {
       title: "Completed Example",
-      completed: true
+      completed: true,
+      key: createId()
     },
     {
       title: "Incompleted Example",
-      completed: false
+      completed: false,
+      key: createId()
     }
   ]);
 
@@ -77,18 +90,27 @@ function Todo() {
       ...tasks,
       {
         title,
-        completed: false
+        completed: false,
+        key: createId()
       }
     ];
 
     setTasks(newTasks);
   }
 
-  const removeTask = index => {
-    const newTasks = [...tasks];
+  const removeTask = key => {
+    const newTasks = tasks.filter((task) => {
+      return task.key !== key;
+    });
 
-    newTasks.splice(index, 1);
     setTasks(newTasks);
+  }
+
+  const completeTask = key => {
+    const updatedTasks = [...tasks];
+
+    key.completed = !key.completed
+    setTasks(updatedTasks);
   }
 
   return (
@@ -102,14 +124,15 @@ function Todo() {
 
       <div className="todo-listPosition">
         <div className="todo-listContainer">
-          <h1>Todo List</h1>
+          <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
             {tasks.map((task, index) => (
               <Task
                 task={task}
                 index={index}
-                key={index}
+                key={task.key}
                 removeTask={removeTask}
+                completeTask={completeTask}
               />
             ))}
           </ul>
