@@ -71,6 +71,7 @@ function CreateTask({ addTask }) {
 function Todo() {
   const createId = () => uuidv4();
 
+  // Add Place holder item
   const [tasks, setTasks] = useState([
     {
       title: "Completed Example",
