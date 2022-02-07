@@ -74,15 +74,12 @@ function CreateTask({ addTask }) {
 }
 
 function Todo() {
-  const createId = () => {
-    return uuidv4()
-  };
-
   // Add Place holder item
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
+    const data = JSON.parse(savedTasks);
 
-    return savedTasks ? JSON.parse(savedTasks) : []
+    return savedTasks ? data : [];
   });
 
   useEffect(() => {
@@ -95,7 +92,7 @@ function Todo() {
       {
         title,
         completed: false,
-        key: createId()
+        key: uuidv4()
       }
     ];
 
