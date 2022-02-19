@@ -10,5 +10,4 @@ A simple todo app to practice React
 - [ ] Break into separate files
 - [ ] Add TypeScript
 
-
-<img width="1410" alt="Screen Shot 2022-02-19 at 1 47 29 PM" src="https://user-images.githubusercontent.com/6706495/154816737-75882ea7-382b-4cee-ba17-164e0afe26f9.png">
+![todo-list](https://user-images.githubusercontent.com/6706495/154816802-b83725b9-3051-4ab3-aea0-e17be243b729.jpg)
