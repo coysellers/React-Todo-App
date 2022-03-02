@@ -1,8 +1,20 @@
 import React from "react"
 
-export default function Task({ task, completeTask, removeTask }) {
-  const checkMark = task.completed
-    ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
+interface Task {
+  title: string,
+  completed: boolean,
+  key: string
+}
+
+type Props = {
+  task: Task,
+  completeTask: Function,
+  removeTask: Function
+}
+
+export const Task = ({ task, completeTask, removeTask }: Props) => {
+  const checkMark = task.completed ?
+    "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
     : "";
 
   return (
@@ -18,8 +30,8 @@ export default function Task({ task, completeTask, removeTask }) {
       </svg>
       <div className="todo-listItemInner">
         <p
-          className={task.completed
-            ? "todo-listText text-[#d1d5db]"
+          className={task.completed ?
+            "todo-listText text-[#d1d5db]"
             : "todo-listText"
           }
           style={{textDecoration: task.completed ? "line-through" : ""}}

@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Task from "./components/Task"
-import CreateTask from "./components/CreateTask"
+import { Task } from "./components/Task"
+import { CreateTask } from "./components/CreateTask"
 import './index.css'
 
 function App() {
@@ -58,10 +58,9 @@ function App() {
         <div className="todo-listContainer">
           <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
-            {tasks.map((task, index) => (
+            {tasks.map((task) => (
               <Task
                 task={task}
-                index={index}
                 key={task.key}
                 removeTask={removeTask}
                 completeTask={completeTask}
