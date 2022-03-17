@@ -1,20 +1,19 @@
 import React from "react"
 
 interface Task {
-  title: string,
-  completed: boolean,
-  key: string
+  title: string;
+  completed: boolean;
+  key: string;
+}
+interface TaskProps {
+  task: Task;
+  completeTask: (task: Task) => void;
+  removeTask: (key: string) => void;
 }
 
-type Props = {
-  task: Task,
-  completeTask: Function,
-  removeTask: Function
-}
-
-export const Task = ({ task, completeTask, removeTask }: Props) => {
-  const checkMark = task.completed ?
-    "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
+export const Task = ({ task, completeTask, removeTask }: TaskProps): JSX.Element => {
+  const checkMark = task.completed
+    ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
     : "";
 
   return (
@@ -30,10 +29,7 @@ export const Task = ({ task, completeTask, removeTask }: Props) => {
       </svg>
       <div className="todo-listItemInner">
         <p
-          className={task.completed ?
-            "todo-listText text-[#d1d5db]"
-            : "todo-listText"
-          }
+          className={`todo-listText ${task.completed ? "text-[#d1d5db]" : ""}`}
           style={{textDecoration: task.completed ? "line-through" : ""}}
           onClick={() => completeTask(task)}
         >
@@ -41,7 +37,7 @@ export const Task = ({ task, completeTask, removeTask }: Props) => {
         </p>
         <button
           className="hover:bg-blue-400 group todo-listItemRemove"
-          onClick={() => removeTask(task.key)}
+          onClick={() => removeTask(task)}
         >
           Remove
         </button>

@@ -30,19 +30,20 @@ function App() {
     setTasks(newTasks);
   }
 
-  const removeTask = key => {
-    const newTasks = tasks.filter((task) => {
-      return task.key !== key;
-    });
+  const completeTask = ({ key }) => {
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    const completedTask = updatedTasks.find((task) => task.key === key);
 
-    setTasks(newTasks);
-  }
+    completedTask.completed = !completedTask.completed;
+  
+    setTasks([...updatedTasks]);
+  };
 
-  const completeTask = key => {
-    const updatedTasks = [...tasks];
+  const removeTask = ({ key }) => {
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    const completedTask = updatedTasks.filter((task) => task.key !== key);
 
-    key.completed = !key.completed
-    setTasks(updatedTasks);
+    setTasks([...completedTask]);
   }
 
   return (
@@ -62,8 +63,8 @@ function App() {
               <Task
                 task={task}
                 key={task.key}
-                removeTask={removeTask}
                 completeTask={completeTask}
+                removeTask={removeTask}
               />
             ))}
           </ul>
