@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Task from "./components/Task"
-import CreateTask from "./components/CreateTask"
+import { Task } from "./components/Task"
+import { CreateTask } from "./components/CreateTask"
 import './index.css'
 
 function App() {
@@ -30,19 +30,22 @@ function App() {
     setTasks(newTasks);
   }
 
-  const removeTask = key => {
-    const newTasks = tasks.filter((task) => {
-      return task.key !== key;
-    });
+  const completeTask = (key) => {
+    console.log(key)
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    const completedTask = updatedTasks.find((task) => task.key === key);
 
-    setTasks(newTasks);
-  }
+    completedTask.completed = !completedTask.completed;
+  
+    setTasks([...updatedTasks]);
+  };
 
-  const completeTask = key => {
-    const updatedTasks = [...tasks];
+  const removeTask = (key) => {
+    console.log(key)
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    const completedTask = updatedTasks.filter((task) => task.key !== key);
 
-    key.completed = !key.completed
-    setTasks(updatedTasks);
+    setTasks([...completedTask]);
   }
 
   return (
@@ -58,13 +61,13 @@ function App() {
         <div className="todo-listContainer">
           <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
-            {tasks.map((task, index) => (
+            {tasks.map(({ title, completed, key }) => (
               <Task
-                task={task}
-                index={index}
-                key={task.key}
-                removeTask={removeTask}
+                title={title}
+                completed={completed}
+                itemId={key}
                 completeTask={completeTask}
+                removeTask={removeTask}
               />
             ))}
           </ul>

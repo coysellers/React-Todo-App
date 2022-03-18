@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 
-export default function CreateTask({ addTask }) {
+// type CreateTaskProps = {
+//   addTask: (title: string) => void;
+// }
+
+export const CreateTask = ({ addTask }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = e => {
