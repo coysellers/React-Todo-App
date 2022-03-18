@@ -30,7 +30,8 @@ function App() {
     setTasks(newTasks);
   }
 
-  const completeTask = ({ key }) => {
+  const completeTask = (key) => {
+    console.log(key)
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.find((task) => task.key === key);
 
@@ -39,7 +40,8 @@ function App() {
     setTasks([...updatedTasks]);
   };
 
-  const removeTask = ({ key }) => {
+  const removeTask = (key) => {
+    console.log(key)
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.filter((task) => task.key !== key);
 
@@ -59,10 +61,11 @@ function App() {
         <div className="todo-listContainer">
           <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
-            {tasks.map((task) => (
+            {tasks.map(({ title, completed, key }) => (
               <Task
-                task={task}
-                key={task.key}
+                title={title}
+                completed={completed}
+                itemId={key}
                 completeTask={completeTask}
                 removeTask={removeTask}
               />
