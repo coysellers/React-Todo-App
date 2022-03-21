@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 // interface Task {
 //   title: string;
@@ -13,7 +13,13 @@ import React from "react"
 //   removeTask: (key: string) => void;
 // }
 
-export const Task = ({ completed, completeTask, itemId, removeTask, title}) => {
+export const Task = ({
+  completed,
+  completeTask,
+  itemId,
+  removeTask,
+  title,
+}) => {
   const checkMark = completed
     ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
     : "";
@@ -32,7 +38,7 @@ export const Task = ({ completed, completeTask, itemId, removeTask, title}) => {
       <div className="todo-listItemInner">
         <p
           className={`todo-listText ${completed ? "text-[#d1d5db]" : ""}`}
-          style={{textDecoration: completed ? "line-through" : ""}}
+          style={{ textDecoration: completed ? "line-through" : "" }}
           onClick={() => completeTask(itemId)}
         >
           {title}
@@ -46,4 +52,4 @@ export const Task = ({ completed, completeTask, itemId, removeTask, title}) => {
       </div>
     </li>
   );
-}
+};

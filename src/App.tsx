@@ -1,9 +1,8 @@
-
-import React, { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-import { Task } from "./components/Task"
-import { CreateTask } from "./components/CreateTask"
-import './index.css'
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Task } from "./components/Task";
+import { CreateTask } from "./components/CreateTask";
+import "./index.css";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -17,36 +16,36 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = title => {
+  const addTask = (title) => {
     const newTasks = [
       ...tasks,
       {
         title,
         completed: false,
-        key: uuidv4()
-      }
+        key: uuidv4(),
+      },
     ];
 
     setTasks(newTasks);
-  }
+  };
 
   const completeTask = (key) => {
-    console.log(key)
+    console.log(key);
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.find((task) => task.key === key);
 
     completedTask.completed = !completedTask.completed;
-  
+
     setTasks([...updatedTasks]);
   };
 
   const removeTask = (key) => {
-    console.log(key)
+    console.log(key);
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.filter((task) => task.key !== key);
 
     setTasks([...completedTask]);
-  }
+  };
 
   return (
     <div className="todo">
@@ -76,7 +75,7 @@ function App() {
         <CreateTask addTask={addTask} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
