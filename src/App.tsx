@@ -62,6 +62,7 @@ function App() {
           <ul className="todo-list">
             {tasks.map(({ title, completed, id }) => (
               <Task
+                key={id}
                 title={title}
                 completed={completed}
                 id={id}
