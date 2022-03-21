@@ -22,27 +22,27 @@ function App() {
       {
         title,
         completed: false,
-        key: uuidv4(),
+        id: uuidv4(),
       },
     ];
 
     setTasks(newTasks);
   };
 
-  const completeTask = (key) => {
-    console.log(key);
+  const completeTask = (id) => {
+    console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
-    const completedTask = updatedTasks.find((task) => task.key === key);
+    const completedTask = updatedTasks.find((task) => task.id === id);
 
     completedTask.completed = !completedTask.completed;
 
     setTasks([...updatedTasks]);
   };
 
-  const removeTask = (key) => {
-    console.log(key);
+  const removeTask = (id) => {
+    console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
-    const completedTask = updatedTasks.filter((task) => task.key !== key);
+    const completedTask = updatedTasks.filter((task) => task.id !== id);
 
     setTasks([...completedTask]);
   };
@@ -60,11 +60,11 @@ function App() {
         <div className="todo-listContainer">
           <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
-            {tasks.map(({ title, completed, key }) => (
+            {tasks.map(({ title, completed, id }) => (
               <Task
                 title={title}
                 completed={completed}
-                itemId={key}
+                id={id}
                 completeTask={completeTask}
                 removeTask={removeTask}
               />
