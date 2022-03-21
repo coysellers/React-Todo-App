@@ -3,7 +3,7 @@ import React from "react";
 interface Task {
   title: string;
   completed: boolean;
-  key: string;
+  id: string;
 }
 
 interface TaskProps {
