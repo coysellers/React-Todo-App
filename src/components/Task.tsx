@@ -6,10 +6,7 @@ interface Task {
   id: string;
 }
 
-interface TaskProps {
-  title: string;
-  completed: boolean;
-  id: string;
+interface TaskProps extends Task {
   completeTask: (task: Task) => void;
   removeTask: (id: string) => void;
 }
