@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Task } from "./components/Task";
+import Task from "./components/Task";
 import { CreateTask } from "./components/CreateTask";
 import "./index.css";
 
 function App() {
-  const [tasks, setTasks] = useState(() => {
+  const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("tasks");
-    const data = JSON.parse(savedTasks);
+    const data = JSON.parse(savedTasks) as Task[];
 
     return savedTasks ? data : [];
   });
@@ -17,7 +17,7 @@ function App() {
   }, [tasks]);
 
   const addTask = (title) => {
-    const newTasks = [
+    const newTasks: Task[] = [
       ...tasks,
       {
         title,

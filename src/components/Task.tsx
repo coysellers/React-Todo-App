@@ -1,25 +1,26 @@
 import React from "react";
 
-// interface Task {
-//   title: string;
-//   completed: boolean;
-//   key: string;
-// }
-// interface TaskProps {
-//   title: string;
-//   completed: boolean;
-//   itemId: string;
-//   completeTask: (task: Task) => void;
-//   removeTask: (key: string) => void;
-// }
+interface Task {
+  title: string;
+  completed: boolean;
+  key: string;
+}
 
-export const Task = ({
+interface TaskProps {
+  title: string;
+  completed: boolean;
+  itemId: string;
+  completeTask: (task: Task) => void;
+  removeTask: (key: string) => void;
+}
+
+const Task = ({
   completed,
   completeTask,
   itemId,
   removeTask,
   title,
-}) => {
+}: TaskProps): JSX.Element => {
   const checkMark = completed
     ? "m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9"
     : "";
@@ -53,3 +54,5 @@ export const Task = ({
     </li>
   );
 };
+
+export default Task;

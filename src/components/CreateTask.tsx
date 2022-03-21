@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-// type CreateTaskProps = {
-//   addTask: (title: string) => void;
-// }
+interface CreateTaskProps {
+  addTask: (title: string) => void;
+}
 
-export const CreateTask = ({ addTask }) => {
+export const CreateTask = ({ addTask }: CreateTaskProps): JSX.Element => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
