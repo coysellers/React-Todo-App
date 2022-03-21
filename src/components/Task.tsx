@@ -7,7 +7,7 @@ interface Task {
 }
 
 interface TaskProps extends Task {
-  completeTask: (task: Task) => void;
+  completeTask: (id: string) => void;
   removeTask: (id: string) => void;
 }
 

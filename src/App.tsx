@@ -29,7 +29,7 @@ function App() {
     setTasks(newTasks);
   };
 
-  const completeTask = (id) => {
+  const completeTask = (id: string) => {
     console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.find((task) => task.id === id);
@@ -39,7 +39,7 @@ function App() {
     setTasks([...updatedTasks]);
   };
 
-  const removeTask = (id) => {
+  const removeTask = (id: string) => {
     console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
     const completedTask = updatedTasks.filter((task) => task.id !== id);
