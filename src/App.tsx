@@ -1,14 +1,13 @@
-
-import React, { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-import { Task } from "./components/Task"
-import { CreateTask } from "./components/CreateTask"
-import './index.css'
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import Task from "./components/Task";
+import { CreateTask } from "./components/CreateTask";
+import "./index.css";
 
 function App() {
-  const [tasks, setTasks] = useState(() => {
+  const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("tasks");
-    const data = JSON.parse(savedTasks);
+    const data = JSON.parse(savedTasks) as Task[];
 
     return savedTasks ? data : [];
   });
@@ -17,36 +16,36 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = title => {
-    const newTasks = [
+  const addTask = (title) => {
+    const newTasks: Task[] = [
       ...tasks,
       {
         title,
         completed: false,
-        key: uuidv4()
-      }
+        id: uuidv4(),
+      },
     ];
 
     setTasks(newTasks);
-  }
+  };
 
-  const completeTask = (key) => {
-    console.log(key)
+  const completeTask = (id: string) => {
+    console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
-    const completedTask = updatedTasks.find((task) => task.key === key);
+    const completedTask = updatedTasks.find((task) => task.id === id);
 
     completedTask.completed = !completedTask.completed;
-  
+
     setTasks([...updatedTasks]);
   };
 
-  const removeTask = (key) => {
-    console.log(key)
+  const removeTask = (id: string) => {
+    console.log(id);
     const updatedTasks = tasks.map((task) => ({ ...task }));
-    const completedTask = updatedTasks.filter((task) => task.key !== key);
+    const completedTask = updatedTasks.filter((task) => task.id !== id);
 
     setTasks([...completedTask]);
-  }
+  };
 
   return (
     <div className="todo">
@@ -61,11 +60,12 @@ function App() {
         <div className="todo-listContainer">
           <h1 className="todo-headingPrimary">Todo List</h1>
           <ul className="todo-list">
-            {tasks.map(({ title, completed, key }) => (
+            {tasks.map(({ title, completed, id }) => (
               <Task
+                key={id}
                 title={title}
                 completed={completed}
-                itemId={key}
+                id={id}
                 completeTask={completeTask}
                 removeTask={removeTask}
               />
@@ -76,7 +76,7 @@ function App() {
         <CreateTask addTask={addTask} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
